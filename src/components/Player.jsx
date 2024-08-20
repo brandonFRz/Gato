@@ -11,12 +11,17 @@ export default function Player({
 
   //Cambia el estado de la edición.
   function handleEditClick() {
-    setIsEditing((editing) => !editing);
-
-    //Si se esta editando y se hace clic en guardar se acuatiza el nombre del jugador.
-    if (isEditing) {
+    //Verifica si el campo no está vacío antes de actualizar el nombre.
+    if (isEditing && playerName.trim() !== "") {
       onChangeName(symbol, playerName);
     }
+    
+    //Si el campo esta vació restaura el nombre anterior
+    if(isEditing && playerName.trim() === ''){
+      setPlayerName(initialName)
+    }
+
+    setIsEditing((editing)=> !editing)
   }
 
   return (
